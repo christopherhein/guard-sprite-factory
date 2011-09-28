@@ -28,7 +28,8 @@ module Guard
     end
 
     def reload
-      run_resprite if self.run_on_start?
+      start
+      stop
     end
 
     def run_all
@@ -40,7 +41,6 @@ module Guard
     end
 
     def run_resprite
-      UI.info "Compiling Sprites"
       ::Rake::Task[@task_name].execute
     end
   end
