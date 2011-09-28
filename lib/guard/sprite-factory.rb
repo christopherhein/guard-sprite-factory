@@ -1,48 +1,47 @@
 require 'guard'
 require 'guard/guard'
+require 'rake'
+require "term/ansicolor"
 
 module Guard
-  class GuardName < Guard
+  class SpriteFactory < Guard
+    include ::Rake::DSL
 
     def initialize(watchers=[], options={})
+      @run_on_start = true if options[:run_on_start] == true
+      @task_name = options[:task_name]
       super
-      # init stuff here, thx!
     end
 
-    # =================
-    # = Guard methods =
-    # =================
+    def run_on_start?
+      !!@run_on_start
+    end
 
-    # If one of those methods raise an exception, the Guard::GuardName instance
-    # will be removed from the active guards.
-
-    # Called once when Guard starts
-    # Please override initialize method to init stuff
     def start
+      load 'Rakefile'
+      run_resprite if self.run_on_start?
       true
     end
 
-    # Called when `stop|quit|exit|s|q|e + enter` is pressed (when Guard quits)
     def stop
       true
     end
 
-    # Called when `reload|r|z + enter` is pressed
-    # This method should be mainly used for "reload" (really!) actions like reloading passenger/spork/bundler/...
     def reload
-      true
+      run_resprite if self.run_on_start?
     end
 
-    # Called when just `enter` is pressed
-    # This method should be principally used for long action like running all specs/tests/...
     def run_all
-      true
+      run_resprite
     end
 
-    # Called on file(s) modifications
     def run_on_change(paths)
-      true
+      run_resprite
     end
 
+    def run_resprite
+      UI.info "Compiling Sprites"
+      ::Rake::Task[@task_name].execute
+    end
   end
 end

@@ -1,0 +1,4 @@
+guard 'sprite-factory', :task_name => 'assets:resprite' do
+  watch(%r{^app/assets/images/icons/*.*})
+  watch(%r{^lib/tasks/assets.rake})
+end
