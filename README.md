@@ -2,10 +2,12 @@
 
 Guard::SpriteFactory automatically regenerates images by running a rake task. defined by you!
 
+
 ## Deendencies! ##
 
 * [Guard](https://github.com/guard/guard)
 * [Sprite Factory](https://github.com/jakesgordon/sprite-factory)
+
 
 ## Install ##
 
@@ -27,6 +29,7 @@ Add guard definition to your `Guardfile` by running this command:
 $ guard init sprite-factory
 ```
 
+
 ## Guardfile ##
 
 ```ruby
@@ -36,12 +39,14 @@ guard 'sprite-factory', :task_name => 'assets:resprite' do
 end
 ```
 
+This will run the rake task `assets:resprite` (the default for spritefactory)
+although if you choose to use a different name you can always change it.
+
+
 ## Options ##
 
 `:run_on_start` - This will automatically run the rake task for recreating images anytime you start guard
 
-This will run the rake task `assets:resprite` (the default for spritefactory)
-although if you choose to use a different name you can always change it.
 
 ## Development ##
 
@@ -49,6 +54,7 @@ although if you choose to use a different name you can always change it.
 - Issues & features [GitHub Issues](https://github.com/christopherhein/guard-sprite-factory/issues)
 
 Feel free to fork it and add anything you would like, if you have a very cool change, let me know and we can work out a pull request.
+
 
 ## License ##
 
